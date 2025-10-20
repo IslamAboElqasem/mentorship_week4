@@ -1,3 +1,3 @@
 class FontFamily {
-  static const String newRockerFont = 'poppins';
+  static const String poppins = 'poppins';
 }
