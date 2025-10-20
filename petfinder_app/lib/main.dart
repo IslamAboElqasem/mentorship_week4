@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:petfinder_app/Core/routing/app_router.dart';
 import 'package:petfinder_app/Core/routing/routes.dart';
+import 'Core/di/injection_container.dart' as di;
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await di.setupServiceLocator();
   runApp(MyApp(
     appRouter: AppRouter(),
   ));

@@ -1,9 +1,10 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:petfinder_app/Core/constants/svgs.dart';
 import 'package:petfinder_app/Core/helper/spacing.dart';
 import 'package:petfinder_app/Core/theme/styles.dart';
+import 'package:petfinder_app/Core/constants/svgs.dart';
 
 class PetCard extends StatelessWidget {
   final String image;
@@ -38,16 +39,25 @@ class PetCard extends StatelessWidget {
       ),
       child: Row(
         children: [
-          Container(
-            color: const Color(0xffE1F8F9),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(12.r),
-              child: Image.asset(
-                image,
+          ClipRRect(
+            borderRadius: BorderRadius.circular(12.r),
+            child: CachedNetworkImage(
+              imageUrl: image,
+              width: 112.w,
+              height: 112.w,
+              fit: BoxFit.cover,
+              placeholder: (context, url) => Container(
+                color: Colors.grey.shade100,
                 width: 112.w,
                 height: 112.w,
-                fit: BoxFit.cover,
+                child: const Center(
+                  child: CircularProgressIndicator(strokeWidth: 2),
+                ),
               ),
+              errorWidget: (context, url, error) {
+                print('Image load error: $error');
+                return const Icon(Icons.error, color: Colors.red);
+              },
             ),
           ),
           horizontalSpace(15),
@@ -64,25 +74,15 @@ class PetCard extends StatelessWidget {
                 verticalSpace(6),
                 Row(
                   children: [
-                    SvgPicture.asset(
-                      Svgs.locationIcon,
-                      height: 14.h,
-                    ),
+                    SvgPicture.asset(Svgs.locationIcon, height: 14.h),
                     horizontalSpace(5),
-                    Text(
-                      distance,
-                      style: AppTextStyles.font14Subtitle400,
-                    ),
+                    Text(distance, style: AppTextStyles.font14Subtitle400),
                   ],
                 ),
               ],
             ),
           ),
-          Icon(
-            Icons.favorite_border,
-            color: Colors.grey.shade500,
-            size: 22.sp,
-          ),
+          Icon(Icons.favorite_border, color: Colors.grey.shade500, size: 22.sp),
         ],
       ),
     );
