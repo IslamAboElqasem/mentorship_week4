@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:petfinder_app/Core/constants/svgs.dart';
 
 import 'package:petfinder_app/Core/helper/extensions.dart';
 import 'package:petfinder_app/Core/helper/spacing.dart';
@@ -44,8 +46,18 @@ class OnboardingScreen extends StatelessWidget {
                   width: double.infinity,
                   height: 44.h,
                   child: CustomButton(
-                    color: AppColors.buttonPink,
-                    title: 'Get Started',
+                    color: AppColors.tealLight,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SvgPicture.asset(Svgs.petsIcon),
+                        horizontalSpace(12),
+                        Text(
+                          'Get Started',
+                          style: AppTextStyles.font18White500,
+                        ),
+                      ],
+                    ),
                     onTap: () {
                       context.pushReplacementNamed(Routes.homeScreen);
                     },
