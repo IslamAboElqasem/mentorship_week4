@@ -76,13 +76,22 @@ class PetCard extends StatelessWidget {
                   children: [
                     SvgPicture.asset(Svgs.locationIcon, height: 14.h),
                     horizontalSpace(5),
-                    Text(distance, style: AppTextStyles.font14Subtitle400),
+                    Flexible(
+                      child: Text(
+                        distance,
+                        style: AppTextStyles.font14Subtitle400,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
                   ],
                 ),
               ],
             ),
           ),
-          Icon(Icons.favorite_border, color: Colors.grey.shade500, size: 22.sp),
+          Padding(
+              padding: EdgeInsets.all(8.w),
+              child: Icon(Icons.favorite_border,
+                  color: Colors.grey.shade500, size: 22.sp)),
         ],
       ),
     );
