@@ -77,4 +77,25 @@ void main() {
 
     expect(find.byKey(const Key('catListView')), findsOneWidget);
   });
+
+  testWidgets('Display error message when repository throws', (tester) async {
+    // 🔹 Make repository throw exception
+    when(() => mockCatRepository.getCats())
+        .thenThrow(Exception('Network Error'));
+
+    await tester.pumpWidget(
+      ScreenUtilInit(
+        designSize: const Size(375, 812),
+        builder: (context, _) {
+          return const MaterialApp(home: HomeScreen());
+        },
+      ),
+    );
+
+    // wait for the cubit to emit error state
+    await tester.pumpAndSettle();
+
+    // 🔹 Verify the error message appears
+    expect(find.textContaining('Error:'), findsOneWidget);
+  });
 }
