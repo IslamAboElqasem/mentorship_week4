@@ -38,6 +38,7 @@ class HomeScreen extends StatelessWidget {
                         return const Center(child: CircularProgressIndicator());
                       } else if (state is CatSuccess) {
                         return ListView.separated(
+                          key: const Key('catListView'),
                           itemCount: state.cats.length,
                           separatorBuilder: (_, __) => SizedBox(height: 10.h),
                           itemBuilder: (context, index) {

@@ -75,6 +75,6 @@ void main() {
     expect(find.text('Tom'), findsOneWidget);
     expect(find.text('Jerry'), findsOneWidget);
 
-    // expect(find.byType(ListView), findsOneWidget);
+    expect(find.byKey(const Key('catListView')), findsOneWidget);
   });
 }
