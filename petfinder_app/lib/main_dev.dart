@@ -7,6 +7,7 @@ import 'Core/di/injection_container.dart' as di;
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await di.setupServiceLocator();
+  await ScreenUtil.ensureScreenSize();
   runApp(MyApp(
     appRouter: AppRouter(),
   ));
